@@ -12,6 +12,9 @@
 		09B07B8B222E4E9300254413 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09B07B89222E4E9300254413 /* Main.storyboard */; };
 		09B07B8D222E4E9300254413 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09B07B8C222E4E9300254413 /* Assets.xcassets */; };
 		09B07B90222E4E9300254413 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09B07B8E222E4E9300254413 /* LaunchScreen.storyboard */; };
+		09B07B98222E4EA800254413 /* RBTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B07B97222E4EA800254413 /* RBTree.swift */; };
+		09B07B9A222E52F500254413 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B07B99222E52F500254413 /* Constants.swift */; };
+		09B07B9C222E5F5A00254413 /* TreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B07B9B222E5F5A00254413 /* TreeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		09B07B8C222E4E9300254413 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		09B07B8F222E4E9300254413 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		09B07B91222E4E9300254413 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		09B07B97222E4EA800254413 /* RBTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RBTree.swift; sourceTree = "<group>"; };
+		09B07B99222E52F500254413 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		09B07B9B222E5F5A00254413 /* TreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +66,9 @@
 				09B07B8C222E4E9300254413 /* Assets.xcassets */,
 				09B07B8E222E4E9300254413 /* LaunchScreen.storyboard */,
 				09B07B91222E4E9300254413 /* Info.plist */,
+				09B07B97222E4EA800254413 /* RBTree.swift */,
+				09B07B99222E52F500254413 /* Constants.swift */,
+				09B07B9B222E5F5A00254413 /* TreeView.swift */,
 			);
 			path = RBTreeUI;
 			sourceTree = "<group>";
@@ -135,8 +144,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09B07B9C222E5F5A00254413 /* TreeView.swift in Sources */,
 				09B07B88222E4E9300254413 /* ViewController.swift in Sources */,
+				09B07B98222E4EA800254413 /* RBTree.swift in Sources */,
 				09B07B86222E4E9300254413 /* AppDelegate.swift in Sources */,
+				09B07B9A222E52F500254413 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
