@@ -29,7 +29,7 @@ class TreeView<T: Comparable>: UIView {
         context.fill(rect)
         let queue = tree.printTreeWithColor()
         let height = log2(Double(queue.size+1))
-        let sectorHeight = rect.height / CGFloat(height*2-1)
+        let sectorHeight = rect.height / CGFloat(height)
         var lastPoint: CGPoint? = nil
         var level = 0
         while !queue.isEmpty {
@@ -47,7 +47,7 @@ class TreeView<T: Comparable>: UIView {
                         drawCircle(center: center!, radius: diameter/2, val: node?.val, red: node?.red, contex: context)
                         lastPoint = center
                     } else {
-                        let offsetY = lastPoint!.y + sectorHeight * 2
+                        let offsetY = lastPoint!.y + sectorHeight
                         center = CGPoint(x: rect.width/2 - CGFloat(count)/2*sectorWidth + sectorWidth/2, y: offsetY)
                         drawCircle(center: center!, radius: diameter/2, val: node?.val, red: node?.red, contex: context)
                         lastPoint = center
@@ -60,6 +60,9 @@ class TreeView<T: Comparable>: UIView {
                 }
                 if i % 2 == 0 {
                     let pCenter = CGPoint(x: center!.x+diameter/2, y: center!.y-sectorHeight)
+                    drawLine(from: center!, to: pCenter, color: Colors.blue, context: context)
+                } else {
+                    let pCenter = CGPoint(x: center!.x-diameter/2, y: center!.y-sectorHeight)
                     drawLine(from: center!, to: pCenter, color: Colors.blue, context: context)
                 }
             }
@@ -74,7 +77,7 @@ class TreeView<T: Comparable>: UIView {
         path.addLine(to: b)
         color.setStroke()
         path.lineWidth = 2
-        path.stroke()
+        path.stroke(with: .copy, alpha: 0.8)
     }
     
     func drawCircle<T>(center: CGPoint, radius: CGFloat, val: T?, red: Bool?, contex: CGContext) {
