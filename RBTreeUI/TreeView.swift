@@ -28,14 +28,17 @@ class TreeView<T: Comparable>: UIView {
         Colors.grey.setFill()
         context.fill(rect)
         let queue = tree.printTreeWithColor()
-        let height = log2(Double(queue.size+1))
-        let sectorHeight = rect.height / CGFloat(height)
+        let treeHeight = log2(Double(queue.size+1))
+        let lowestLevCount = pow(2.0, treeHeight-1)
+        let sectorHeight = rect.height / CGFloat(treeHeight)
+        let sectorWidth = rect.width / CGFloat(lowestLevCount)
+        let diameter = min(sectorHeight, sectorWidth)
         var lastPoint: CGPoint? = nil
         var level = 0
         while !queue.isEmpty {
             let count = Int(pow(2.0, Double(level)))
-            let sectorWidth = rect.width / CGFloat(count)
-            let diameter = min(sectorWidth, sectorHeight)
+//            let sectorWidth = rect.width / CGFloat(count)
+//            let diameter = min(sectorWidth, sectorHeight)
 
             for i in 0..<count {
                 let node = queue.pop()
@@ -48,33 +51,46 @@ class TreeView<T: Comparable>: UIView {
                         lastPoint = center
                     } else {
                         let offsetY = lastPoint!.y + sectorHeight
-                        center = CGPoint(x: rect.width/2 - CGFloat(count)/2*sectorWidth + sectorWidth/2, y: offsetY)
+                        var offsetX: CGFloat =  0.5 * sectorWidth
+                        if Int(treeHeight) > level + 1 {
+                            offsetX =  CGFloat(pow(2.0, (treeHeight-Double(level)-2.0))) * sectorWidth
+                        }
+                        center = CGPoint(x: offsetX, y: offsetY)
                         drawCircle(center: center!, radius: diameter/2, val: node?.val, red: node?.red, contex: context)
                         lastPoint = center
                     }
                 } else {
-                    let offsetX = lastPoint!.x + sectorWidth
+                    let offsetX = lastPoint!.x + CGFloat(pow(2.0, (treeHeight-Double(level)-1.0))) * sectorWidth
                     center = CGPoint(x: offsetX, y: lastPoint!.y)
                     drawCircle(center: center!, radius: diameter/2, val: node?.val, red: node?.red, contex: context)
                     lastPoint = center
                 }
+                let offsetX =  CGFloat(pow(2.0, (treeHeight-Double(level)-2.0))) * sectorWidth
                 if i % 2 == 0 {
-                    let pCenter = CGPoint(x: center!.x+diameter/2, y: center!.y-sectorHeight)
-                    drawLine(from: center!, to: pCenter, color: Colors.blue, context: context)
+                    if level != 0 {
+                        let pCenter = CGPoint(x: center!.x+offsetX, y: center!.y-sectorHeight)
+                        drawLine(from: center!, to: pCenter, radius: diameter/2, color: Colors.blue, context: context)
+                    }
                 } else {
-                    let pCenter = CGPoint(x: center!.x-diameter/2, y: center!.y-sectorHeight)
-                    drawLine(from: center!, to: pCenter, color: Colors.blue, context: context)
+                    let pCenter = CGPoint(x: center!.x-offsetX, y: center!.y-sectorHeight)
+                    drawLine(from: center!, to: pCenter, radius: diameter/2, color: Colors.blue, context: context)
                 }
             }
             level += 1
         }
     }
     
-    func drawLine(from a: CGPoint, to b: CGPoint, color: UIColor, context: CGContext)  {
+    func drawLine(from a: CGPoint, to b: CGPoint, radius: CGFloat, color: UIColor, context: CGContext)  {
+        let triWidth = abs(a.x-b.x)
+        let triHeight = abs(a.y-b.y)
+        let triHypotenuse = sqrt(pow(triWidth, 2.0)+pow(triHeight, 2.0))
+        let ratio = (radius / triHypotenuse)
+        let newA = CGPoint(x: a.x - (a.x - b.x) * ratio, y: a.y - (a.y - b.y) * ratio)
+        let newB = CGPoint(x: b.x - (b.x - a.x) * ratio, y: b.y - (b.y - a.y) * ratio)
         context.saveGState()
         let path = UIBezierPath()
-        path.move(to: a)
-        path.addLine(to: b)
+        path.move(to: newA)
+        path.addLine(to: newB)
         color.setStroke()
         path.lineWidth = 2
         path.stroke(with: .copy, alpha: 0.8)
