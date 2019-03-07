@@ -10,11 +10,14 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var popView: UIView!
     @IBOutlet weak var valueInput: UITextField!
+    @IBOutlet weak var confirmBtn: UIButton!
     @IBOutlet weak var deleteBtn: UIButton!
     @IBOutlet weak var treeContentView: UIView!
     @IBOutlet weak var addBtn: UIButton!
     @IBOutlet weak var bottomPaddingConstrant: NSLayoutConstraint!
+    @IBOutlet weak var popViewBottomConstraint: NSLayoutConstraint!
     
     var treeView: TreeView<Int>?
 
@@ -22,11 +25,15 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = Colors.grey
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
+        deleteBtn.layer.cornerRadius = deleteBtn.bounds.width / 2
         deleteBtn.setTitleColor(.white, for: .normal)
         deleteBtn.backgroundColor = Colors.red_light
+        addBtn.layer.cornerRadius = addBtn.bounds.width / 2
         addBtn.setTitleColor(.white, for: .normal)
         addBtn.backgroundColor = Colors.blue
-        
+        popView.layer.cornerRadius = 8.0
+        popView.alpha = 0.9
+        confirmBtn.setTitleColor(Colors.blue, for: .normal)
 //        NotificationCenter.default.addObserver(self,
 //                                               selector: #selector(self.keyboardNotification(notification:)),
 //                                               name: UIResponder.keyboardWillChangeFrameNotification,
@@ -46,9 +53,11 @@ class ViewController: UIViewController {
         hideKeyboard()
         switch sender {
         case deleteBtn:
-            deleteNode()
+            popup(forAddtion: false)
         case addBtn:
-            addNode()
+            popup(forAddtion: true)
+        case confirmBtn:
+            act()
         default:
             break
         }
@@ -58,7 +67,34 @@ class ViewController: UIViewController {
     @objc func hideKeyboard() {
         valueInput.resignFirstResponder()
     }
+    
+    func popup(forAddtion addtion: Bool)  {
+        if addtion {
+            popView.layer.setValue("addtion", forKey: "handle")
+        } else {
+            popView.layer.setValue("deletion", forKey: "handle")
+        }
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseOut, animations: {
+            self.popViewBottomConstraint.constant = self.view.bounds.height / 2
+            self.view.layoutIfNeeded()
+            self.valueInput.becomeFirstResponder()
 
+        })
+    }
+
+    func act() {
+        if let handle = popView.layer.value(forKey: "handle") as? String, handle == "addtion" {
+            addNode()
+        }
+        if let handle = popView.layer.value(forKey: "handle") as? String, handle == "deletion" {
+            deleteNode()
+        }
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseOut, animations: {
+            self.popViewBottomConstraint.constant = -120
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
     func addNode() {
         if let text = valueInput.text, let val = Int(text) {
             if let view = treeView {
@@ -89,14 +125,15 @@ class ViewController: UIViewController {
                     } else {
                         _ = try view.tree.delete(val: val, in: view.tree.root)
                     }
+                    UIView.transition(with: treeView!, duration: 0.4, options: .transitionCrossDissolve, animations: {
+                        self.treeView!.setNeedsDisplay()
+                    })
                 } catch let err {
                     print(err)
                 }
             }
         }
-        UIView.transition(with: treeView!, duration: 0.4, options: .transitionCrossDissolve, animations: {
-            self.treeView!.setNeedsDisplay()
-        })
+
     }
 
     deinit {
