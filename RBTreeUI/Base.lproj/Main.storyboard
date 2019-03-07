@@ -23,9 +23,10 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sCG-pg-vbj">
                                         <rect key="frame" x="0.0" y="0.0" width="327" height="455"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="sCG-pg-vbj" firstAttribute="top" secondItem="Led-fF-qol" secondAttribute="top" id="7xB-em-l8e"/>
                                     <constraint firstAttribute="bottom" secondItem="sCG-pg-vbj" secondAttribute="bottom" id="MKp-LM-uUE"/>
@@ -89,6 +90,7 @@
                     </view>
                     <connections>
                         <outlet property="addBtn" destination="lQJ-Mc-3nV" id="waw-TZ-hox"/>
+                        <outlet property="bottomPaddingConstrant" destination="j00-nD-s26" id="dHr-BC-ue0"/>
                         <outlet property="deleteBtn" destination="rib-XG-of5" id="opQ-4a-IG4"/>
                         <outlet property="treeContentView" destination="sCG-pg-vbj" id="yJB-ko-Yki"/>
                         <outlet property="valueInput" destination="e1c-9i-9px" id="jO6-BH-BLu"/>

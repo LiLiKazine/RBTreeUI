@@ -115,7 +115,10 @@ class TreeView<T: Comparable>: UIView {
             text = String(describing: val)
         }
         let attributedString = NSAttributedString(string: text, attributes: attributes)
-        attributedString.draw(in: CGRect(x: center.x-radius, y: center.y-radius, width: radius*2, height: radius*2))
+        let size = attributedString.size()
+        let newCenter = CGPoint(x: center.x - size.width / 2, y: center.y - size.height / 2)
+        attributedString.draw(at: newCenter)
+//        attributedString.draw(in: CGRect(x: center.x-radius, y: center.y-radius, width: radius*2, height: radius*2))
         contex.restoreGState()
     }
 

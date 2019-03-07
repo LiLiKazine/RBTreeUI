@@ -81,8 +81,11 @@ class RBTree<T: Comparable> {
     
     var root: Node<T>
     
+    var size: Int = 0
+    
     init(initial: T) {
         self.root = Node<T>(val: initial, isRed: false, parent: nil)
+        size += 1
     }
     
     func find(val: T, in tree: Node<T>?) -> Node<T>? {
@@ -158,6 +161,7 @@ class RBTree<T: Comparable> {
             node.parent = insertionParent
         }
         fixInsert(node: node)
+        size += 1
         return root
     }
     
@@ -193,14 +197,11 @@ class RBTree<T: Comparable> {
             }
         } else {
             if let substitute = findPredecessor(of: node) {
-                let val = node.val
                 node.val = substitute.val
-                substitute.val = val
-                try delete(val: substitute.val, in: substitute.parent)
-            } else {
-                
+                try delete(val: substitute.val, in: substitute)
             }
         }
+        size -= 1
     }
     
     func fixDeletion(node: Node<T>?, parent: Node<T>?) {

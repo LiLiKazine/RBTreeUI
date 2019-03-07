@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var deleteBtn: UIButton!
     @IBOutlet weak var treeContentView: UIView!
     @IBOutlet weak var addBtn: UIButton!
+    @IBOutlet weak var bottomPaddingConstrant: NSLayoutConstraint!
     
     var treeView: TreeView<Int>?
 
@@ -25,9 +26,40 @@ class ViewController: UIViewController {
         deleteBtn.backgroundColor = Colors.red_light
         addBtn.setTitleColor(.white, for: .normal)
         addBtn.backgroundColor = Colors.blue
+        
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: #selector(self.keyboardNotification(notification:)),
+//                                               name: UIResponder.keyboardWillChangeFrameNotification,
+//                                               object: nil)
     }
+    
+//    @objc func keyboardNotification(notification: NSNotification) {
+//        let info = notification.userInfo!
+//        let keyboardFrame: CGRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+//        let y = keyboardFrame.origin.y
+//        UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseOut, animations: {
+//            self.bottomPaddingConstrant.constant = self.view.frame.height - y + 20
+//        }, completion: nil)
+//    }
 
     @IBAction func action(_ sender: UIButton) {
+        hideKeyboard()
+        switch sender {
+        case deleteBtn:
+            deleteNode()
+        case addBtn:
+            addNode()
+        default:
+            break
+        }
+        valueInput.text = nil
+    }
+    
+    @objc func hideKeyboard() {
+        valueInput.resignFirstResponder()
+    }
+
+    func addNode() {
         if let text = valueInput.text, let val = Int(text) {
             if let view = treeView {
                 do {
@@ -43,15 +75,33 @@ class ViewController: UIViewController {
                 self.treeView!.setNeedsDisplay()
             })
         }
-        hideKeyboard()
     }
     
-    @objc func hideKeyboard() {
-        valueInput.text = nil
-        valueInput.resignFirstResponder()
+    func deleteNode() {
+        if let text = valueInput.text, let val = Int(text) {
+            if let view = treeView {
+                do {
+                    if treeView!.tree.size == 1 && treeView!.tree.root.val == val {
+                        treeView?.removeFromSuperview()
+                        treeView = nil
+                        treeContentView.setNeedsLayout()
+                        return
+                    } else {
+                        _ = try view.tree.delete(val: val, in: view.tree.root)
+                    }
+                } catch let err {
+                    print(err)
+                }
+            }
+        }
+        UIView.transition(with: treeView!, duration: 0.4, options: .transitionCrossDissolve, animations: {
+            self.treeView!.setNeedsDisplay()
+        })
     }
 
-
+    deinit {
+//        NotificationCenter.default.removeObserver(self)
+    }
 }
 
 extension ViewController: UITextFieldDelegate {
