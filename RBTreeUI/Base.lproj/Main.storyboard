@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Led-fF-qol">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="10" translatesAutoresizingMaskIntoConstraints="NO" id="Led-fF-qol">
                                 <rect key="frame" x="24" y="68" width="327" height="467"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sCG-pg-vbj">
@@ -35,6 +35,9 @@
                                     <constraint firstItem="sCG-pg-vbj" firstAttribute="leading" secondItem="Led-fF-qol" secondAttribute="leading" id="nsE-t7-Ewq"/>
                                     <constraint firstItem="sCG-pg-vbj" firstAttribute="centerX" secondItem="Led-fF-qol" secondAttribute="centerX" id="yAz-4P-vmY"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="ZAf-a0-3z5"/>
+                                </connections>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rib-XG-of5">
                                 <rect key="frame" x="219.5" y="559" width="60" height="60"/>
