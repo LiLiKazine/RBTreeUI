@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var popView: UIView!
+    @IBOutlet weak var descLbl: UILabel!
     @IBOutlet weak var valueInput: UITextField!
     @IBOutlet weak var confirmBtn: UIButton!
     @IBOutlet weak var deleteBtn: UIButton!
@@ -71,8 +72,13 @@ class ViewController: UIViewController {
     func popup(forAddtion addtion: Bool)  {
         if addtion {
             popView.layer.setValue("addtion", forKey: "handle")
+            descLbl.text = "Addtion"
+            descLbl.textColor = Colors.blue
         } else {
             popView.layer.setValue("deletion", forKey: "handle")
+            descLbl.text = "Deletion"
+            descLbl.textColor = Colors.red
+
         }
         UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseOut, animations: {
             self.popViewBottomConstraint.constant = self.view.bounds.height / 2

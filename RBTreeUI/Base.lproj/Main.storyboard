@@ -62,10 +62,19 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ljj-BZ-stS" userLabel="PopView">
                                 <rect key="frame" x="107.5" y="667" width="160" height="120"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xU2-9Q-3le">
-                                        <rect key="frame" x="8" y="16" width="144" height="48"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ew0-pH-6mY">
+                                        <rect key="frame" x="8" y="16" width="144" height="21"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="48" id="MKW-cf-GAH"/>
+                                            <constraint firstAttribute="height" constant="21" id="o28-vW-xfI"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xU2-9Q-3le">
+                                        <rect key="frame" x="8" y="45" width="144" height="34"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="34" id="MKW-cf-GAH"/>
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -89,12 +98,15 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="RM2-nE-ncd" secondAttribute="trailing" id="5r5-pj-uGL"/>
                                     <constraint firstItem="xU2-9Q-3le" firstAttribute="leading" secondItem="ljj-BZ-stS" secondAttribute="leading" constant="8" id="CoQ-Kp-ZJm"/>
+                                    <constraint firstAttribute="trailing" secondItem="ew0-pH-6mY" secondAttribute="trailing" constant="8" id="KsY-PN-hjc"/>
                                     <constraint firstItem="RM2-nE-ncd" firstAttribute="leading" secondItem="ljj-BZ-stS" secondAttribute="leading" id="N56-ZN-s6Y"/>
                                     <constraint firstAttribute="trailing" secondItem="xU2-9Q-3le" secondAttribute="trailing" constant="8" id="ZEr-gb-t8s"/>
-                                    <constraint firstItem="xU2-9Q-3le" firstAttribute="top" secondItem="ljj-BZ-stS" secondAttribute="top" constant="16" id="be8-pP-2qo"/>
+                                    <constraint firstItem="xU2-9Q-3le" firstAttribute="top" secondItem="ew0-pH-6mY" secondAttribute="bottom" constant="8" id="be8-pP-2qo"/>
+                                    <constraint firstItem="ew0-pH-6mY" firstAttribute="top" secondItem="ljj-BZ-stS" secondAttribute="top" constant="16" id="gnp-BA-WX2"/>
                                     <constraint firstAttribute="bottom" secondItem="RM2-nE-ncd" secondAttribute="bottom" id="sm8-0q-XNV"/>
                                     <constraint firstAttribute="height" constant="120" id="tVO-M1-bDP"/>
                                     <constraint firstAttribute="width" constant="160" id="umd-85-g0U"/>
+                                    <constraint firstItem="ew0-pH-6mY" firstAttribute="leading" secondItem="ljj-BZ-stS" secondAttribute="leading" constant="8" id="why-PR-vNm"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -121,6 +133,7 @@
                         <outlet property="bottomPaddingConstrant" destination="j00-nD-s26" id="dHr-BC-ue0"/>
                         <outlet property="confirmBtn" destination="RM2-nE-ncd" id="ekB-sq-E82"/>
                         <outlet property="deleteBtn" destination="rib-XG-of5" id="opQ-4a-IG4"/>
+                        <outlet property="descLbl" destination="ew0-pH-6mY" id="mwi-aF-nbx"/>
                         <outlet property="popView" destination="ljj-BZ-stS" id="spN-1R-y7R"/>
                         <outlet property="popViewBottomConstraint" destination="2k2-iM-g4w" id="dE4-m5-8Bw"/>
                         <outlet property="treeContentView" destination="sCG-pg-vbj" id="yJB-ko-Yki"/>

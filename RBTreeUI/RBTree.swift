@@ -184,6 +184,8 @@ class RBTree<T: Comparable> {
                 // repair
                 fixDeletion(node: nil, parent: parent)
             }
+            size -= 1
+
         } else if (node.left != nil) != (node.right != nil) {
             let substitute = node.left == nil ? node.right! : node.left!
             node.val = substitute.val
@@ -195,13 +197,14 @@ class RBTree<T: Comparable> {
             } else if node.isRed && !substitute.isRed {
                 node.isRed.toggle()
             }
+            size -= 1
+
         } else {
             if let substitute = findPredecessor(of: node) {
                 node.val = substitute.val
                 try delete(val: substitute.val, in: substitute)
             }
         }
-        size -= 1
     }
     
     func fixDeletion(node: Node<T>?, parent: Node<T>?) {
