@@ -1,6 +1,13 @@
-# RBTreeUI
+
+<center> <h1>RBTreeUI 1</h1> </center>
+
+
+## Descrioption
 
 swift version of red-black tree. demonstrated in quartz 2d.
+
+
+## Demonstration
 
 addition:
 
@@ -12,3 +19,9 @@ deletion:
 
 
 <img src="rbtreeui-d.gif" width="221.5" height="480" />
+
+
+## License
+
+MIT
+
