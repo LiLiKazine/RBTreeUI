@@ -5,10 +5,10 @@ swift version of red-black tree. demonstrated in quartz 2d.
 addition:
 
 
-![](rbtreeui-a.gif)
+<img src="rbtreeui-a.gif" width="590" height="1280" />
 
 
 deletion:
 
 
-![](rbtreeui-d.gif)
+<img src="rbtreeui-d.gif" width="590" height="1280" />
