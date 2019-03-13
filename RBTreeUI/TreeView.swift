@@ -25,8 +25,7 @@ class TreeView<T: Comparable>: UIView {
     // An empty implementation adversely affects performance during animation.
     override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()!
-        UIColor.white.setFill()
-//        Colors.grey.setFill()
+        Colors.grey.setFill()
         context.fill(rect)
         let queue = tree.printTreeWithColor()
         let treeHeight = log2(Double(queue.size+1))
