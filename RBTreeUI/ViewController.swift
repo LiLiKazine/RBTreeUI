@@ -41,6 +41,16 @@ class ViewController: UIViewController {
 //                                               object: nil)
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        // Redraw when view size changed.
+        if let view = treeView {
+            view.setNeedsLayout()
+            view.layoutIfNeeded()
+            view.setNeedsDisplay()
+        }
+    }
+    
 //    @objc func keyboardNotification(notification: NSNotification) {
 //        let info = notification.userInfo!
 //        let keyboardFrame: CGRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
@@ -112,6 +122,15 @@ class ViewController: UIViewController {
             } else {
                 treeView = TreeView(tree: RBTree(initial: val), frame: treeContentView.bounds)
                 treeContentView.addSubview(treeView!)
+                treeView!.backgroundColor = .red
+                treeView!.translatesAutoresizingMaskIntoConstraints = false
+                let top = NSLayoutConstraint(item: treeView!, attribute: .top, relatedBy: .equal, toItem: treeContentView, attribute: .top, multiplier: 1.0, constant: 0.0)
+                let left = NSLayoutConstraint(item: treeView!, attribute: .left, relatedBy: .equal, toItem: treeContentView, attribute: .left, multiplier: 1.0, constant: 0.0)
+                let bottom = NSLayoutConstraint(item: treeView!, attribute: .bottom, relatedBy: .equal, toItem: treeContentView, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+                let right = NSLayoutConstraint(item: treeView!, attribute: .right, relatedBy: .equal, toItem: treeContentView, attribute: .right, multiplier: 1.0, constant: 0.0)
+                let centerX = NSLayoutConstraint(item: treeView!, attribute: .centerX, relatedBy: .equal, toItem: treeContentView, attribute: .centerX, multiplier: 1.0, constant: 0.0)
+                let centerY = NSLayoutConstraint(item: treeView!, attribute: .centerY, relatedBy: .equal, toItem: treeContentView, attribute: .centerY, multiplier: 1.0, constant: 0.0)
+                treeContentView.addConstraints([top, left, bottom, right, centerX, centerY])
             }
             UIView.transition(with: treeView!, duration: 0.4, options: .transitionCrossDissolve, animations: {
                 self.treeView!.setNeedsDisplay()
